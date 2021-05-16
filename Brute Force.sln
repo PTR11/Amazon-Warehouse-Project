@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brute Force", "Brute Force\Brute Force.csproj", "{41423B00-96EB-4252-B63C-30C928EABD30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruteForceTest", "BruteForceTest\BruteForceTest.csproj", "{E536937F-FB82-4861-9EF4-09847A50C39A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{41423B00-96EB-4252-B63C-30C928EABD30} = {41423B00-96EB-4252-B63C-30C928EABD30}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41423B00-96EB-4252-B63C-30C928EABD30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41423B00-96EB-4252-B63C-30C928EABD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41423B00-96EB-4252-B63C-30C928EABD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41423B00-96EB-4252-B63C-30C928EABD30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E536937F-FB82-4861-9EF4-09847A50C39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E536937F-FB82-4861-9EF4-09847A50C39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E536937F-FB82-4861-9EF4-09847A50C39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E536937F-FB82-4861-9EF4-09847A50C39A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6DF9847-0F54-490E-B4BE-5C43A0C3ED12}
+	EndGlobalSection
+EndGlobal

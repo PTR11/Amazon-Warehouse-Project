@@ -1,0 +1,194 @@
+﻿<Window x:Class="Brute_Force.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:local="clr-namespace:Brute_Force.View"
+        mc:Ignorable="d"
+        Title="MainWindow"  SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Game">
+                <MenuItem Header="Start simulation" Command="{Binding StartStopCommand}" />
+                <Separator />
+                <MenuItem Header="{Binding StartStopContent}" Command="{Binding StartStopCommand}" />
+                <Separator />
+                <MenuItem Header="Load simulation details" Command="{Binding LoadSimulationCommand}" />
+                <Separator />
+                <MenuItem Header="Save simulation details" Command="{Binding SaveTableCommand}" />
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="160" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="{Binding WindowHeight}" >
+                <Grid>
+                    <Border BorderBrush="Black" BorderThickness="2" Margin="10,0,0,0">
+                        <Grid Grid.Column="0" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label HorizontalAlignment="Center" FontSize="20" Grid.Row="0">Eszköztár</Label>
+                            <StackPanel Grid.Row="1">
+                                <Label Margin="5,0,0,0" Padding="0,0,0,0" Content="Sorok száma" HorizontalAlignment="Center"/>
+                                <wpfTool:IntegerUpDown x:Name="rowsNumber" Width="100" Minimum="5" Value="{Binding LineN}" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2">
+                                <Label Margin="5,0,0,0" Padding="0,0,0,0" Content="Oszlopok száma" HorizontalAlignment="Center"/>
+                                <wpfTool:IntegerUpDown x:Name="colsNumber" Width="100" Minimum="5" Value="{Binding ColN}" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <Button  Width="110" Margin="0,30,0,0" Content="Tábla átméretezése" Grid.Row="3" Click="Refresh"></Button>
+                            <Button Margin="0,30,0,0" HorizontalAlignment="Center" Content="Tábla betöltése" Grid.Row="4" FontSize="15" Width="110" Command="{Binding LoadSimulationCommand}"></Button>
+                            <Label HorizontalAlignment="Center" FontSize="20" Grid.Row="5" Margin="0,30,0,0">Idő:</Label>
+                            <Grid Grid.Row="6" Height="20" Margin="10,0,10,0">
+                                <Button HorizontalAlignment="Left" Click="Slower">&lt;&lt;</Button>
+                                <Button HorizontalAlignment="Center" Command="{Binding StartStopCommand}" Content="{Binding StartStopContent}"></Button>
+                                <Button HorizontalAlignment="Right" Click="Faster">&gt;&gt;</Button>
+                            </Grid>
+                            <Label HorizontalAlignment="Center" FontSize="20" Grid.Row="7" Margin="0,30,0,0">Objektumok:</Label>
+                            <Button Name="Charger" Background="White" Grid.Row="8" Height="100" Width="100" Margin="0,30,0,0"  Command="{Binding ClickChargerCommand}" Click="ChangeBorderBrush" BorderThickness="2px" BorderBrush="Black">
+                                <StackPanel>
+                                    <Image Source="/images/charger.png"></Image>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="Robot" Background="White" Grid.Row="9" Height="100" Width="100" Margin="0,30,0,0"  Command="{Binding ClickRobotCommand}" Click="ChangeBorderBrush" BorderThickness="2px" BorderBrush="Black">
+                                <StackPanel>
+                                    <Image Source="/images/directions/robotUp.png"></Image>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="Station" Background="White" Grid.Row="10" Height="100" Width="100" Margin="0,30,0,0" Command="{Binding ClickStationCommand}" Click="ChangeBorderBrush" BorderThickness="2px" BorderBrush="Black" >
+                                <StackPanel>
+                                    <Image Source="/images/station.png"></Image>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="Shelf" Background="White" Grid.Row="11" Height="100" Width="100" Margin="0,30,0,30"  Command="{Binding ClickShelfCommand}" Click="ChangeBorderBrush" BorderThickness="2px" BorderBrush="Black">
+                                <StackPanel>
+                                    <Image Source="/images/shelf.png"></Image>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ScrollViewer>
+            
+            <GridSplitter Grid.Column="1"/>
+            <Grid Grid.Column="2" Margin="0,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ItemsControl Grid.Row="0" ItemsSource="{Binding Fields}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="{Binding GridW}" Rows="{Binding GridH}"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button IsEnabled="True" Focusable="True" Width="{Binding Width}" x:Name="btnName" Background="{Binding Background}"  Height="{Binding Height}" Command="{Binding OnClick}" CommandParameter="{Binding Number}" PreviewMouseMove="DragButton" Drop="DropButton" AllowDrop="True">
+                                <Button.InputBindings>
+                                    <MouseBinding Gesture="Shift+LeftClick" Command="{Binding DesignationShelf}" CommandParameter="{Binding Number}"/>
+                                    <!-- A jobbklikre nyisson meg egy ablakot, ahol a termékeket módosíthatjuk -->
+                                    <MouseBinding Gesture="RightClick" Command="{Binding OnRightClick}" CommandParameter="{Binding Number}"/>
+                                </Button.InputBindings>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border BorderBrush="{Binding Designation}" BorderThickness="1">
+                                            <Grid Background="{Binding Background, ElementName=btnName}">
+                                                <Image Source="{Binding Image}"  />
+                                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20px" FontWeight="Heavy" Text="{Binding Text}"></TextBlock>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Grid.Row" Value="{Binding X}" />
+                            <Setter Property="Grid.Column" Value="{Binding Y}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0">Lépésszám:</Label>
+                    <TextBlock Grid.Column="1" Text="{Binding Time}" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </Grid>
+            <GridSplitter Grid.Column="3"></GridSplitter>
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="{Binding WindowHeight}" Grid.Column="4" >
+                <Border BorderBrush="Black" BorderThickness="2" Margin="0,0,0,0" >
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label HorizontalAlignment="Center" FontSize="18" Grid.Row="0">Megrendelések</Label>
+                        <Label Margin="5,25,0,0" Padding="0,0,0,0" Content="Várólista" HorizontalAlignment="Center" Grid.Row="1"/>
+                        <ListView x:Name="waitingList" Grid.Row="2" Width="120" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True" Height="100">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Termék" DisplayMemberBinding="{Binding ProductId}" Width="50" />
+                                    <GridViewColumn Header="Időzítés" DisplayMemberBinding="{Binding OrderTime}" Width="50"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button  Width="110" Margin="0,30,0,0" Content="Rendelések törlése" Grid.Row="3" Click="Delete_orders"></Button>
+                        <Label Margin="0,25,0,0" Padding="0,0,0,0" Content="Rendelés" HorizontalAlignment="Center" Grid.Row="4"/>
+                        <ListView x:Name="orderlist" SelectionChanged="OrderClickedProduct"  Margin="0,0,0,25" Grid.Row="5" MouseDoubleClick="DoubleClickOnListView" Width="120" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True" Height="100">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Termékek" DisplayMemberBinding="{Binding NameOfProduct}" Width="100" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Border>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
